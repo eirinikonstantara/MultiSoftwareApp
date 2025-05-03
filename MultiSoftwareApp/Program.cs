@@ -25,7 +25,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Use the default ports (5000 for HTTP, 5001 for HTTPS)
-app.Urls.Add("http://localhost:5000");
-app.Urls.Add("https://localhost:5001");
+// app.Urls.Add("http://localhost:5000");
+// app.Urls.Add("https://localhost:5001");
 
 app.Run();
