@@ -1,21 +1,10 @@
 # MultiSoftwareApp
 
-## Description
-[Project description will be added here]
+## Project Structure
+This project is organized into several branches, each focusing on a specific deliverable:
 
-## Features
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-
-## Installation
-[Installation instructions will be added here]
-
-## Usage
-[Usage instructions will be added here]
-
-## Contributing
-[Contribution guidelines will be added here]
-
-## License
-[License information will be added here] 
+- [api-backend](https://github.com/eirinikonstantara/MultiSoftwareApp/tree/api-backend) - Backend API implementation
+- [billing](https://github.com/eirinikonstantara/MultiSoftwareApp/tree/billing) - Billing analysis
+- [presentation](https://github.com/eirinikonstantara/MultiSoftwareApp/tree/presentation) - Presentation
+- [website](https://github.com/eirinikonstantara/MultiSoftwareApp/tree/website) - Public website implementation
+- [architecture-and-bicep](https://github.com/eirinikonstantara/MultiSoftwareApp/tree/architecture-and-bicep) - Infrastructure and deployment configurations
