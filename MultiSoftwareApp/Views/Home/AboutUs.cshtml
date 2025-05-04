@@ -1,9 +1,124 @@
-﻿
-@{
-    ViewData["Title"] = "AboutUs";
+﻿@{
+    ViewData["Title"] = "About Us";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>
-    We are MultiSoftware Enterprise, a multinational software development company headquartered in Athens, Greece, with approximately 350 employees distributed across multiple regions.
-</p>
+<!-- Hero/Banner Section -->
+<section class="about-hero container-fluid px-0" style="padding: 110px 0 60px 0; background: linear-gradient(120deg, #181a1b 60%, #7ecbff 120%); min-height: 40vh;">
+    <div class="row justify-content-center mx-0">
+        <div class="col-lg-8 col-md-10 col-12 text-center">
+            <h1 class="display-3 fw-bold mb-3" style="letter-spacing:0.01em; background: linear-gradient(90deg, #7ecbff 0%, #b16cea 50%, #ff6bcb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">About MultiSoftware Enterprise</h1>
+            <p class="lead text-light mb-0">Empowering the digital world with secure, scalable, and innovative <span class="fw-bold text-info">Azure</span> cloud-first solutions.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Values Section -->
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h2 class="mb-4 fw-bold">Our Mission</h2>
+            <p class="lead mb-4">To deliver world-class software solutions that drive digital transformation for businesses worldwide. We believe in a cloud-first approach, leveraging the latest technologies and <span class="text-info">Microsoft Azure</span> to ensure security, scalability, and innovation for our clients and to help our team learn Azure hands-on.</p>
+            <h3 class="mt-5 mb-3 fw-semibold">Our Values</h3>
+            <div class="row g-4">
+                <div class="col-md-3 col-6 text-center">
+                    <div class="p-3 rounded-4 bg-dark text-light h-100">
+                        <i class="fas fa-lightbulb fa-2x mb-2 text-info"></i>
+                        <div class="fw-bold">Innovation</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="p-3 rounded-4 bg-dark text-light h-100">
+                        <i class="fas fa-shield-alt fa-2x mb-2 text-info"></i>
+                        <div class="fw-bold">Security & Trust</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="p-3 rounded-4 bg-dark text-light h-100">
+                        <i class="fas fa-globe fa-2x mb-2 text-info"></i>
+                        <div class="fw-bold">Global Collaboration</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="p-3 rounded-4 bg-dark text-light h-100">
+                        <i class="fas fa-users fa-2x mb-2 text-info"></i>
+                        <div class="fw-bold">Customer Success</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section (With Photos) -->
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 text-center">
+            <h2 class="mb-4 fw-bold">Our Team</h2>
+            <p class="mb-5">With 350+ employees across multiple regions, we are a truly global company. Our diverse team of experts is dedicated to building secure, scalable, and innovative solutions for the digital era, and to mastering <span class="text-info">Azure</span> together.</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 col-6">
+                    <div class="card bg-dark text-light border-0 rounded-4 p-4 align-items-center">
+                        <img src="/team/raw.png" alt="Alex Papadopoulos" class="team-photo mb-3" />
+                        <div class="fw-bold">Galini Babzeli</div>
+                        <!-- <div class="small text-muted">CEO</div> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="card bg-dark text-light border-0 rounded-4 p-4 align-items-center">
+                        <img src="/team/raw_2.png" alt="Maria Ioannou" class="team-photo mb-3" />
+                        <div class="fw-bold">Anthi Petridou</div>
+                        <!-- <div class="small text-muted">CTO</div> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="card bg-dark text-light border-0 rounded-4 p-4 align-items-center">
+                        <img src="/team/raw_3.png" alt="John Nikolaidis" class="team-photo mb-3" />
+                        <div class="fw-bold">Eirini Konstantara</div>
+                        <!-- <div class="small text-muted">Lead Engineer</div> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="card bg-dark text-light border-0 rounded-4 p-4 align-items-center">
+                        <img src="/team/e73ee2fbc08e44dc.png" alt="Sophia Kosta" class="team-photo mb-3" />
+                        <div class="fw-bold">Alex Doda</div>
+                        <!-- <div class="small text-muted">Azure Specialist</div> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="card bg-dark text-light border-0 rounded-4 p-4 align-items-center">
+                        <img src="/team/argiris_Ghibli.png" alt="Team Member" class="team-photo mb-3" />
+                        <div class="fw-bold">Argiris Gkogkidis</div>
+                        <!-- <div class="small text-muted">Your Role</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .team-photo {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #7ecbff;
+            box-shadow: 0 2px 12px rgba(0,120,212,0.12);
+            background: #222;
+        }
+    </style>
+</section>
+
+<!-- Contact Section -->
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <h2 class="mb-4 fw-bold">Contact Us</h2>
+            <p class="mb-3">Have questions or want to work with us? Reach out anytime! We love talking about <span class="text-info">Azure</span> and cloud technology.</p>
+            <a href="mailto:info@multisoftware.com" class="btn btn-primary btn-lg mb-2"><i class="fas fa-envelope me-2"></i>Email Us</a>
+            <div class="mt-3">
+                <a href="#" class="me-3" title="LinkedIn"><i class="fab fa-linkedin fa-2x text-info"></i></a>
+                <a href="#" class="me-3" title="Twitter"><i class="fab fa-twitter fa-2x text-info"></i></a>
+                <a href="#" title="GitHub"><i class="fab fa-github fa-2x text-info"></i></a>
+            </div>
+        </div>
+    </div>
+</section>

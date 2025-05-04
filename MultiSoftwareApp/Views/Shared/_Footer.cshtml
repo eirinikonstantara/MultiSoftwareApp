@@ -1,0 +1,69 @@
+<footer class="footer" style="background: #101216; border-top: 2px solid #22243a;">
+    <div class="container py-4">
+        <div class="row align-items-start gy-4">
+            <!-- Company/Logo/Address -->
+            <div class="col-md-4 d-flex flex-column align-items-md-start align-items-center text-md-start text-center">
+                <div class="mb-2">
+                    <span class="bg-dark rounded-circle p-2 me-2 d-inline-block" style="box-shadow:0 0 8px #0078d4;">
+                        <i class="fas fa-cube fa-lg text-info"></i>
+                    </span>
+                    <span class="fw-bold fs-5">MultiSoftware Enterprise</span>
+                </div>
+                <div class="text-muted small mb-1">Cloud-First Software Solutions</div>
+                <div class="text-muted small mb-1"><i class="fas fa-map-marker-alt me-1"></i> Athens, Greece</div>
+            </div>
+            <!-- Navigation -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <div class="fw-semibold text-light mb-2">Quick Links</div>
+                <ul class="list-unstyled mb-2">
+                    <li class="mb-1"><a asp-area="" asp-controller="Home" asp-action="Index" class="footer-link"><i class="fas fa-home me-1"></i> Home</a></li>
+                    <li class="mb-1"><a asp-area="" asp-controller="Home" asp-action="AboutUs" class="footer-link"><i class="fas fa-info-circle me-1"></i> About Us</a></li>
+                    <li class="mb-1"><span class="footer-link"><i class="fas fa-concierge-bell me-1"></i> Services</span>
+                        <ul class="list-unstyled ms-4 mt-1">
+                            <li><span class="footer-link small"><i class="fas fa-cloud me-1"></i> Azure Cloud Migration</span></li>
+                            <li><span class="footer-link small"><i class="fas fa-server me-1"></i> Managed Azure Hosting</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Contact & Azure -->
+            <div class="col-md-4 d-flex flex-column align-items-md-end align-items-center text-md-end text-center">
+                <div class="fw-semibold text-light mb-2">Contact & Social</div>
+                <div class="mb-2">
+                    <a href="mailto:info@multisoftware.com" class="footer-link me-2" title="Email"><i class="fas fa-envelope fa-lg"></i></a>
+                    <a href="#" class="footer-link me-2" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a href="#" class="footer-link me-2" title="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="footer-link" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
+                </div>
+                <div class="d-flex align-items-center justify-content-md-end justify-content-center mt-2">
+                    <span class="bg-info bg-opacity-10 rounded-pill px-3 py-1 me-2" style="box-shadow:0 0 8px #0078d4;">
+                        <i class="fab fa-microsoft text-info me-1"></i> <span class="fw-semibold text-info">Powered by Azure</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4" style="border-color:#23243a;">
+        <div class="row">
+            <div class="col-md-6 small text-muted text-md-start text-center mb-2 mb-md-0">
+                &copy; 2025 MultiSoftware Enterprise. All rights reserved.
+            </div>
+            <div class="col-md-3 text-center">
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="footer-link small"><i class="fas fa-shield-alt me-1"></i> Privacy Policy</a>
+            </div>
+            <div class="col-md-3 small text-info text-md-end text-center">
+                <i class="fas fa-graduation-cap me-1"></i> Made for Azure learning
+            </div>
+        </div>
+    </div>
+    <style>
+        .footer-link {
+            color: #7ecbff;
+            text-decoration: none;
+            transition: color 0.2s, text-shadow 0.2s;
+        }
+        .footer-link:hover {
+            color: #fff;
+            text-shadow: 0 0 8px #0078d4;
+        }
+    </style>
+</footer> 
