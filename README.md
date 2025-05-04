@@ -20,23 +20,25 @@ A simple Spring Boot API that allows you to upload and view images. The applicat
 
 ### Configuration
 
-Update the `application.properties` file with your Azure details:
+This application uses environment variables for configuration. You can set them directly in your environment or use a .env file with a tool like spring-dotenv.
 
-```properties
+Required environment variables:
+
+```
 # Azure SQL Configuration
-spring.datasource.url=jdbc:sqlserver://<your-server-name>.database.windows.net:1433;database=<your-database-name>;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-spring.datasource.username=<your-username>
-spring.datasource.password=<your-password>
+AZURE_SQL_URL=jdbc:sqlserver://<your-server>.database.windows.net:1433;database=<your-db>;encrypt=true
+AZURE_SQL_USERNAME=your_username
+AZURE_SQL_PASSWORD=your_password
 
-# Azure Blob Storage Configuration
-azure.storage.connection-string=<your-storage-connection-string>
-azure.storage.container.name=images-original
+# Azure Blob Storage
+AZURE_STORAGE_CONNECTION_STRING=your_storage_connection_string
+AZURE_STORAGE_CONTAINER_NAME=images-original
+
+# Optional
+PORT=8080  # Default is 8080, but Azure Web Apps expects 80
 ```
 
-Alternatively, set the following environment variables:
-- `AZURE_SQL_USERNAME`
-- `AZURE_SQL_PASSWORD`
-- `AZURE_STORAGE_CONNECTION_STRING`
+For local development, you can use the default values in application.properties.
 
 ### Building the Application
 
@@ -55,6 +57,27 @@ Or using Maven:
 ```bash
 mvn spring-boot:run
 ```
+
+## Deployment to Azure
+
+### App Service Configuration
+
+1. In Azure App Service, set these environment variables in Configuration → Application Settings:
+   - AZURE_SQL_URL
+   - AZURE_SQL_USERNAME
+   - AZURE_SQL_PASSWORD
+   - AZURE_STORAGE_CONNECTION_STRING
+   - AZURE_STORAGE_CONTAINER_NAME
+   - PORT=80
+
+2. Set the startup command in Configuration → General settings:
+   ```
+   java -jar /home/site/wwwroot/app.jar
+   ```
+
+3. Upload the JAR file to /home/site/wwwroot/ via Kudu Console (Advanced Tools)
+
+4. Make sure the blob container has correct public access settings for the images to be accessible.
 
 ## API Endpoints
 
