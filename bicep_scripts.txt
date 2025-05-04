@@ -1,0 +1,176 @@
+// Παράμετροι για Object IDs
+param adminObjectId  string
+param devObjectId    string
+
+// Σταθερές ονόματα/δίκτυα
+var vnetName        = 'mainVNet'
+var vnetPrefix      = '10.0.0.0/16'
+var appSubnetName   = 'appSubnet'
+var appSubnetPrefix = '10.0.1.0/24'
+var fwSubnetName    = 'AzureFirewallSubnet'
+var fwSubnetPrefix  = '10.0.2.0/24'
+var fwPrivateIp     = '10.0.2.4'
+var routeTableName  = 'mainRouteTable'
+var fwPipName       = 'azureFirewallPip'
+
+// 1. Subscription-level Roles
+resource adminRole 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  name: guid(subscription().id, 'admin-role')
+  properties: {
+    principalId: adminObjectId
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'Owner')
+    scope: subscription().id
+  }
+}
+resource devRole 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  name: guid(subscription().id, 'dev-role')
+  properties: {
+    principalId: devObjectId
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'Reader')
+    scope: subscription().id
+  }
+}
+
+// 2. Network Security Group για το app subnet
+resource appNSG 'Microsoft.Network/networkSecurityGroups@2023-02-01' = {
+  name: 'appSubnetNSG'
+  location: resourceGroup().location
+  properties: {
+    securityRules: [
+      {
+        name: 'AllowHttpIn'
+        properties: {
+          protocol: 'Tcp'
+          sourcePortRange: '*'
+          destinationPortRange: '80'
+          sourceAddressPrefix: '*'
+          destinationAddressPrefix: '*'
+          access: 'Allow'
+          priority: 100
+          direction: 'Inbound'
+        }
+      }
+      {
+        name: 'AllowHttpsIn'
+        properties: {
+          protocol: 'Tcp'
+          sourcePortRange: '*'
+          destinationPortRange: '443'
+          sourceAddressPrefix: '*'
+          destinationAddressPrefix: '*'
+          access: 'Allow'
+          priority: 110
+          direction: 'Inbound'
+        }
+      }
+    ]
+  }
+}
+
+// 3. Virtual Network
+resource vnet 'Microsoft.Network/virtualNetworks@2023-02-01' = {
+  name: vnetName
+  location: resourceGroup().location
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        vnetPrefix
+      ]
+    }
+  }
+}
+
+// 4. appSubnet (child του vnet) με NSG, Service Endpoints & Route Table
+resource appSubnet 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
+  parent: vnet
+  name: appSubnetName
+  properties: {
+    addressPrefix: appSubnetPrefix
+    networkSecurityGroup: {
+      id: appNSG.id
+    }
+    serviceEndpoints: [
+      'Microsoft.Sql'
+      'Microsoft.Storage'
+    ]
+    routeTable: {
+      id: resourceId('Microsoft.Network/routeTables', routeTableName)
+    }
+  }
+  dependsOn: [
+    appNSG
+  ]
+}
+
+// 5. AzureFirewallSubnet (child του vnet)
+resource fwSubnet 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
+  parent: vnet
+  name: fwSubnetName
+  properties: {
+    addressPrefix: fwSubnetPrefix
+  }
+}
+
+// 6. Route Table με default route προς Azure Firewall
+resource routeTable 'Microsoft.Network/routeTables@2023-02-01' = {
+  name: routeTableName
+  location: resourceGroup().location
+  properties: {
+    disableBgpRoutePropagation: false
+    routes: [
+      {
+        name: 'defaultRoute'
+        properties: {
+          addressPrefix: '0.0.0.0/0'
+          nextHopType: 'VirtualAppliance'
+          nextHopIpAddress: fwPrivateIp
+        }
+      }
+    ]
+  }
+}
+
+// 7. Public IP για Azure Firewall
+resource firewallPip 'Microsoft.Network/publicIPAddresses@2023-02-01' = {
+  name: fwPipName
+  location: resourceGroup().location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    publicIPAllocationMethod: 'Static'
+  }
+}
+
+// 8. Azure Firewall με ipConfiguration
+resource azFirewall 'Microsoft.Network/azureFirewalls@2023-02-01' = {
+  name: 'mainFirewall'
+  location: resourceGroup().location
+  properties: {
+    sku: {
+      name: 'AZFW_VNet'
+      tier: 'Standard'
+    }
+    ipConfigurations: [
+      {
+        name: 'fwConfig'
+        properties: {
+          subnet: {
+            id: fwSubnet.id
+          }
+          publicIPAddress: {
+            id: firewallPip.id
+          }
+          privateIPAllocationMethod: 'Static'
+          privateIPAddress: fwPrivateIp
+        }
+      }
+    ]
+  }
+  dependsOn: [
+    fwSubnet
+    firewallPip
+  ]
+}
+
+// … (εδώ εισάγεις τα υπόλοιπα resources: SQL Server, SQL DB, SQL VNet rule, App Service Plan, WebApp, FunctionApp, Storage Account με networkAcls, blob containers & lifecycle policies, Recovery Vault, κ.λπ.)
